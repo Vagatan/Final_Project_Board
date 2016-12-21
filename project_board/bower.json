@@ -1,0 +1,21 @@
+{
+  "name": "project_board",
+  "homepage": "https://github.com/Vagatan/Final_Project_Board",
+  "authors": [
+    "Vagatan <grzesiek.kozak@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "web/assets/vendor/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}
