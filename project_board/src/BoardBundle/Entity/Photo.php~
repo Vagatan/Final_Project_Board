@@ -97,4 +97,27 @@ class Photo
     {
         return $this->path;
     }
+
+    /**
+     * Set advertisement
+     *
+     * @param \BoardBundle\Entity\Advertisement $advertisement
+     * @return Photo
+     */
+    public function setAdvertisement(\BoardBundle\Entity\Advertisement $advertisement = null)
+    {
+        $this->advertisement = $advertisement;
+
+        return $this;
+    }
+
+    /**
+     * Get advertisement
+     *
+     * @return \BoardBundle\Entity\Advertisement 
+     */
+    public function getAdvertisement()
+    {
+        return $this->advertisement;
+    }
 }

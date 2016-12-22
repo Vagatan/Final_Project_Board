@@ -2,13 +2,23 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Board{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}">
     </head>
     <body>
-        {% block body %}{% endblock %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2">Menu</div>
+            <div class="col-md-9">
+                {% block body %}{% endblock %}
+            </div>
+            <div class="col-md-1">Reklama</div>
+
+        </div>
+    </div>
+
         {% block javascripts %}{% endblock %}
     </body>
 </html>

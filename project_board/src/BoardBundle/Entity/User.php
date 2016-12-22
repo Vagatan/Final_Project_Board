@@ -19,14 +19,12 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @ORM\Column(name="first_name", type="string")
+     * @var string
+     * @ORM\Column(name="phone_number", type="string")
      */
-    private $firstName;
+    private $phoneNumber;
 
-    /**
-     * @ORM\Column(name="last_name", type="string")
-     */
-    private $lastName;
+
 
     /**
      * @ORM\OneToMany(targetEntity="Advertisement", mappedBy="user")
@@ -51,37 +49,6 @@ class User extends BaseUser
         $this->roles = array('ROLE_USER');
     }
 
-    /**
-     * @return mixed
-     */
-    public function getFirstName()
-    {
-        return $this->firstName;
-    }
-
-    /**
-     * @param mixed $firstName
-     */
-    public function setFirstName($firstName)
-    {
-        $this->firstName = $firstName;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getLastName()
-    {
-        return $this->lastName;
-    }
-
-    /**
-     * @param mixed $lastName
-     */
-    public function setLastName($lastName)
-    {
-        $this->lastName = $lastName;
-    }
 
 
     /**
@@ -148,5 +115,28 @@ class User extends BaseUser
     public function getComments()
     {
         return $this->comments;
+    }
+
+    /**
+     * Set phoneNumber
+     *
+     * @param string $phoneNumber
+     * @return User
+     */
+    public function setPhoneNumber($phoneNumber)
+    {
+        $this->phoneNumber = $phoneNumber;
+
+        return $this;
+    }
+
+    /**
+     * Get phoneNumber
+     *
+     * @return string 
+     */
+    public function getPhoneNumber()
+    {
+        return $this->phoneNumber;
     }
 }
