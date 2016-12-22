@@ -1,13 +1,15 @@
-{% extends 'base.html.twig' %}
+{% extends 'FOSUserBundle::layout.html.twig' %}
 
 {% block body %}
     <h1>Advertisement creation</h1>
-
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
-
+    <div class="col-xs-4">
+        <div class="form-group">
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <input type="submit" value="Create"/>
+            {{ form_end(form) }}
+        </div>
+    </div>
     <ul>
         <li>
             <a href="{{ path('advertisement_index') }}">Back to the list</a>

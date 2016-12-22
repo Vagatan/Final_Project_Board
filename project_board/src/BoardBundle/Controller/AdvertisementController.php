@@ -5,7 +5,8 @@ namespace BoardBundle\Controller;
 use BoardBundle\Entity\Advertisement;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Advertisement controller.
@@ -130,7 +131,6 @@ class AdvertisementController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('advertisement_delete', array('id' => $advertisement->getId())))
             ->setMethod('DELETE')
-            ->getForm()
-        ;
+            ->getForm();
     }
 }
