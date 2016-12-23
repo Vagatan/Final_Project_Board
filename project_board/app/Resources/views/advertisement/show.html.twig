@@ -5,24 +5,26 @@
 
     <table class="table table-striped">
         <tbody>
+
             <tr>
-                <th>Id</th>
-                <td>{{ advertisement.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
+                <th>Tytuł</th>
                 <td>{{ advertisement.title }}</td>
             </tr>
             <tr>
-                <th>Description</th>
+                <th>Opis</th>
                 <td>{{ advertisement.description }}</td>
             </tr>
             <tr>
-                <th>Expirationdate</th>
+                <th>Kategoria</th>
+                <td>{{ advertisement.category.name }}</td>
+            </tr>
+            <tr>
+                <th>Ważne do</th>
                 <td>{% if advertisement.expirationDate %}{{ advertisement.expirationDate|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
         </tbody>
     </table>
+    <p>Zadzwoń do ogłoszeniodawcy: {{ advertisement.user.phonenumber }}</p>
 
     <ul>
         <li>

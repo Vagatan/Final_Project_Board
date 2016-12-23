@@ -3,28 +3,34 @@
 {% block body %}
     <h1>Advertisements list</h1>
 
-    <table>
+    <table class="table table-striped">
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Expirationdate</th>
-                <th>Actions</th>
-            </tr>
+        <tr>
+            <th>Kategoria</th>
+            <th>Tytuł</th>
+            <th>Opis</th>
+            <th>Ważne do</th>
+            <th>Kontakt</th>
+            <th>Akcje</th>
+        </tr>
         </thead>
         <tbody>
         {% for advertisement in advertisements %}
             <tr>
-                <td><a href="{{ path('advertisement_show', { 'id': advertisement.id }) }}">{{ advertisement.id }}</a></td>
-                <td>{{ advertisement.title }}</td>
+                <td>
+                    <a href="{{ path('category_show', { 'id': advertisement.category.id }) }}">{{ advertisement.category.name }}</a>
+                </td>
+                <td><a href="{{ path('advertisement_show', { 'id': advertisement.id }) }}">{{ advertisement.title }}</a>
+                </td>
                 <td>{{ advertisement.description }}</td>
                 <td>{% if advertisement.expirationDate %}{{ advertisement.expirationDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+
+
+                <td>{{ advertisement.user.phonenumber }}</td>
+
                 <td>
                     <ul>
-                        <li>
-                            <a href="{{ path('advertisement_show', { 'id': advertisement.id }) }}">show</a>
-                        </li>
+
                         <li>
                             <a href="{{ path('advertisement_edit', { 'id': advertisement.id }) }}">edit</a>
                         </li>

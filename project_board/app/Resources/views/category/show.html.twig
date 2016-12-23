@@ -3,7 +3,7 @@
 {% block body %}
     <h1>Category</h1>
 
-    <table>
+    <table class="table table-striped">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -19,6 +19,9 @@
     <ul>
         <li>
             <a href="{{ path('category_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('advertisement_index', { 'id': category.id}) }}">Advertisements list</a>
         </li>
         <li>
             <a href="{{ path('category_edit', { 'id': category.id }) }}">Edit</a>

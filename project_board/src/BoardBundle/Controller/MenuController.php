@@ -8,13 +8,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 
+
+
 class MenuController extends Controller
 {
-    /**
-     * @Route("")
-     *
-     */
-    public function menuAction(){
+
+    public function menuAction()
+    {
 
         $categories = $this->getDoctrine()->getRepository("BoardBundle:Category")->findAll();
 

@@ -25,7 +25,6 @@ class User extends BaseUser
     private $phoneNumber;
 
 
-
     /**
      * @ORM\OneToMany(targetEntity="Advertisement", mappedBy="user")
      */
@@ -45,10 +44,10 @@ class User extends BaseUser
     /**
      * @ORM\PrePersist
      */
-    public function prePersist() {
+    public function prePersist()
+    {
         $this->roles = array('ROLE_USER');
     }
-
 
 
     /**
@@ -77,7 +76,7 @@ class User extends BaseUser
     /**
      * Get advertisements
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getAdvertisements()
     {
@@ -110,10 +109,33 @@ class User extends BaseUser
     /**
      * Get comments
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getComments()
     {
         return $this->comments;
+    }
+
+    /**
+     * Set phoneNumber
+     *
+     * @param string $phoneNumber
+     * @return User
+     */
+    public function setPhoneNumber($phoneNumber)
+    {
+        $this->phoneNumber = $phoneNumber;
+
+        return $this;
+    }
+
+    /**
+     * Get phoneNumber
+     *
+     * @return string
+     */
+    public function getPhoneNumber()
+    {
+        return $this->phoneNumber;
     }
 }

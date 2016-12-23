@@ -3,29 +3,20 @@
 {% block body %}
     <h1>Categories list</h1>
 
-    <table>
+    <table class="table table-striped">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Actions</th>
+
+                <th>Nazwa kategorii</th>
+
             </tr>
         </thead>
         <tbody>
         {% for category in categories %}
             <tr>
-                <td><a href="{{ path('category_show', { 'id': category.id }) }}">{{ category.id }}</a></td>
-                <td>{{ category.name }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('category_show', { 'id': category.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('category_edit', { 'id': category.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
+                <td><a href="{{ path('category_show', { 'id': category.id }) }}">{{ category.name }}</a></td>
+
+
             </tr>
         {% endfor %}
         </tbody>

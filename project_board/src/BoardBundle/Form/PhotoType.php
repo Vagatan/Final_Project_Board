@@ -7,23 +7,23 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
-class AdvertisementType extends AbstractType
+class PhotoType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('title')->add('description')->add('expirationDate')->add('user')->add('category', EntityType::class, ["class" => "BoardBundle:Category", "choice_label" => "name"]);
+        $builder->add('title')->add('path')->add('advertisement', EntityType::class, ["class" => "BoardBundle:Advertisement", "choice_label" => "title"]);
     }
-
+    
     /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'BoardBundle\Entity\Advertisement'
+            'data_class' => 'BoardBundle\Entity\Photo'
         ));
     }
 
@@ -32,7 +32,7 @@ class AdvertisementType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'boardbundle_advertisement';
+        return 'boardbundle_photo';
     }
 
 
