@@ -9,16 +9,18 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 
 
-
 class MenuController extends Controller
 {
-
+    /**
+     * @Route("/")
+     *
+     */
     public function menuAction()
     {
 
         $categories = $this->getDoctrine()->getRepository("BoardBundle:Category")->findAll();
 
 
-        return ["categories" => $categories];
+        return $this->render("BoardBundle:Menu:menu.html.twig", ["categories" => $categories]);
     }
 }
