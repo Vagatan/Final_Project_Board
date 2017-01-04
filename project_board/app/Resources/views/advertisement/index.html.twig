@@ -1,49 +1,44 @@
 {% extends 'FOSUserBundle::layout.html.twig' %}
 
 {% block body %}
-    <h1>Advertisements list</h1>
+    <h1>Lista ogłoszeń</h1>
 
     <table class="table table-striped">
         <thead>
-        <tr>
-            <th>Kategoria</th>
-            <th>Tytuł</th>
-            <th>Opis</th>
-            <th>Ważne do</th>
-            <th>Kontakt</th>
-            <th>Akcje</th>
-        </tr>
+            <tr>
+                <th>Kategoria</th>
+                <th>Tytuł</th>
+                <th>Opis</th>
+                <th>Ważne do</th>
+                <th>Kontakt</th>
+                <th>Akcje</th>
+            </tr>
         </thead>
         <tbody>
-        {% for advertisement in advertisements %}
-            <tr>
-                <td>
-                    <a href="{{ path('category_show', { 'id': advertisement.category.id }) }}">{{ advertisement.category.name }}</a>
-                </td>
-                <td><a href="{{ path('advertisement_show', { 'id': advertisement.id }) }}">{{ advertisement.title }}</a>
-                </td>
-                <td>{{ advertisement.description }}</td>
-                <td>{% if advertisement.expirationDate %}{{ advertisement.expirationDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+            {% for advertisement in advertisements %}
+                <tr>
+                    <td>
+                        <a href="{{ path('category_show', { 'id': advertisement.category.id }) }}">{{ advertisement.category.name }}</a>
+                    </td>
+                    <td><a href="{{ path('advertisement_show', { 'id': advertisement.id }) }}">{{ advertisement.title }}</a>
+                    </td>
+                    <td>{{ advertisement.description }}</td>
+                    <td>{% if advertisement.expirationDate %}{{ advertisement.expirationDate|date('Y-m-d H:i:s') }}{% endif %}</td>
 
 
-                <td>{{ advertisement.user.phonenumber }}</td>
+                    <td>{{ advertisement.user.phonenumber }}</td>
 
-                <td>
-                    <ul>
+                    <td>
 
-                        <li>
-                            <a href="{{ path('advertisement_edit', { 'id': advertisement.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
+                        <a href="{{ path('advertisement_edit', { 'id': advertisement.id }) }}" class="btn btn-info" role="button">Edytuj</a>
+
+                    </td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('advertisement_new') }}">Create a new advertisement</a>
-        </li>
-    </ul>
+
+    <a href="{{ path('advertisement_new') }}" class="btn btn-primary" role="button">Dodaj nowe ogłoszenie</a>
+
 {% endblock %}

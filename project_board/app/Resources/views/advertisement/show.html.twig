@@ -1,7 +1,7 @@
 {% extends 'FOSUserBundle::layout.html.twig' %}
 
 {% block body %}
-    <h1>Advertisement</h1>
+    <h1>Ogłoszenie</h1>
 
     <table class="table table-striped">
         <tbody>
@@ -24,19 +24,17 @@
             </tr>
         </tbody>
     </table>
-    <p>Zadzwoń do ogłoszeniodawcy: {{ advertisement.user.phonenumber }}</p>
+    <h2>Numer kontaktowy: {{ advertisement.user.phonenumber }}</h2>
 
-    <ul>
-        <li>
-            <a href="{{ path('advertisement_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('advertisement_edit', { 'id': advertisement.id }) }}">Edit</a>
-        </li>
-        <li>
+    <div class="btn-group">
+    
+            <a href="{{ path('advertisement_index') }}" class="btn btn-primary" role="button">Wróć do listy ogłoszeń</a>
+       
+            <a href="{{ path('advertisement_edit', { 'id': advertisement.id }) }}" class="btn btn-info" role="button">Edytuj</a>
+        
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+            <input type="submit" value="Usuń" class="btn btn-danger" role="button">
             {{ form_end(delete_form) }}
-        </li>
-    </ul>
+        
+    </div>
 {% endblock %}

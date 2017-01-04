@@ -1,16 +1,16 @@
 {% extends 'FOSUserBundle::layout.html.twig' %}
 
 {% block body %}
-    <h1>Category creation</h1>
+    <h1>Dodaj nową kategorię</h1>
 
     {{ form_start(form) }}
         {{ form_widget(form) }}
-        <input type="submit" value="Create" />
+        <input type="submit" value="Dodaj" />
     {{ form_end(form) }}
 
     <ul>
         <li>
-            <a href="{{ path('category_index') }}">Back to the list</a>
+            <a href="{{ path('category_index') }}">Wróć do listy karegorii</a>
         </li>
     </ul>
 {% endblock %}

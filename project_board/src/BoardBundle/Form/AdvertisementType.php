@@ -14,7 +14,7 @@ class AdvertisementType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('title')->add('description')->add('expirationDate')->add('user')->add('category', EntityType::class, ["class" => "BoardBundle:Category", "choice_label" => "name"]);
+        $builder->add('title', 'text', ["label"=>"Tytuł"])->add('description', 'textarea', ["label"=>"Opis"])->add('expirationDate', 'datetime', ["label" => "Ważne do"])->add('user')->add('category', EntityType::class, ["label"=>"Kategoria", "class" => "BoardBundle:Category", "choice_label" => "name"]);
     }
 
     /**

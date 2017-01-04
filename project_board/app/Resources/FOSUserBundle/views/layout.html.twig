@@ -9,7 +9,19 @@
 <body>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-2">Kategorie
+        <div class="col-md-2">
+            <br>
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            <a href="{{ path('fos_user_profile_show') }} " role="button" class="btn btn-primary btn-block">{{ app.user.username }}</a>
+
+                {% else %}
+                    <a href="{{ path('fos_user_security_login') }} " role="button" class="btn btn-primary btn-block">Zaloguj się</a>
+            {% endif %}
+            <br>
+
+            <br>
+            <a href="{{ path('advertisement_index') }}" class="list-group-item list-group-item-info text-center">Wszystkie ogłoszenia</a>
+            <br>
             {% render(controller("BoardBundle:Menu:menu")) %}
 
         </div>
@@ -44,7 +56,7 @@
             {% endblock %}
         </div>
 
-        <div class="col-md-1">Reklama</div>
+        <div class="col-md-1"></div>
 
     </div>
 </div>

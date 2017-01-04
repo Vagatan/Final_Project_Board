@@ -1,35 +1,48 @@
 {% extends 'FOSUserBundle::layout.html.twig' %}
 
 {% block body %}
-    <h1>Category</h1>
+    <h1>{{ category.name }}</h1>
 
     <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Tytuł</th>
+                <th>Opis</th>
+                <th>Ważne do</th>
+                <th>Kontakt</th>
+                <th>Akcje</th>
+            </tr>
+        </thead>
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ category.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ category.name }}</td>
-            </tr>
+            {% for advertisement in category.advertisements %}
+                <tr>
+                    <td><a href="{{ path('advertisement_show', { 'id': advertisement.id }) }}">{{ advertisement.title }}</a>
+                    </td>
+                    <td>{{ advertisement.description }}</td>
+                    <td>{% if advertisement.expirationDate %}{{ advertisement.expirationDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+
+
+                    <td>{{ advertisement.user.phonenumber }}</td>
+
+                    <td>
+
+                        <a href="{{ path('advertisement_edit', { 'id': advertisement.id }) }}" class="btn btn-info" role="button">Edytuj</a>
+
+                    </td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('category_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('advertisement_index', { 'id': category.id}) }}">Advertisements list</a>
-        </li>
-        <li>
-            <a href="{{ path('category_edit', { 'id': category.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    <div class="btn-group">
+        <a href="{{ path('category_index') }}" class="btn btn-primary" role="button">Lista kategorii</a>
+
+        <a href="{{ path('advertisement_index') }}" class="btn btn-primary" role="button">Lista ogłoszeń</a>
+
+        <a href="{{ path('category_edit', { 'id': category.id }) }}" class="btn btn-info" role="button">Edytuj kategorię</a>
+
+        {{ form_start(delete_form) }}
+        <input type="submit" value="Usuń" class="btn btn-danger" role="button">
+        {{ form_end(delete_form) }}
+    </div>    
 {% endblock %}
