@@ -34,4 +34,8 @@ security:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/advertisement/$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^(\/advertisement\/).*, role: ROLE_USER }
+        - { path: ^/category/$, role: ROLE_USER }
+        - { path: ^/photo/, role: ROLE_USER }
