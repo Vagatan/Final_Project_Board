@@ -11,7 +11,9 @@
                 <th>Opis</th>
                 <th>Ważne do</th>
                 <th>Kontakt</th>
-                <th>Akcje</th>
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    <th>Akcje</th>
+                    {% endif %}
             </tr>
         </thead>
         <tbody>
@@ -25,20 +27,26 @@
                     <td>{{ advertisement.description }}</td>
                     <td>{% if advertisement.expirationDate %}{{ advertisement.expirationDate|date('Y-m-d H:i:s') }}{% endif %}</td>
 
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                        <td>{{ advertisement.user.phonenumber }}</td>
+                    {% else %}
 
-                    <td>{{ advertisement.user.phonenumber }}</td>
+                        <td><a href="{{ path('fos_user_security_login') }} " class="btn btn-primary" role="button" >Zaloguj się / Zarejestruj</a></td>
 
-                    <td>
+            {% endif %}
 
-                        <a href="{{ path('advertisement_edit', { 'id': advertisement.id }) }}" class="btn btn-info" role="button">Edytuj</a>
+            <td>
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    <a href="{{ path('advertisement_edit', { 'id': advertisement.id }) }}" class="btn btn-info" role="button">Edytuj</a>
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+</tbody>
+</table>
 
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-
-
+{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
     <a href="{{ path('advertisement_new') }}" class="btn btn-primary" role="button">Dodaj nowe ogłoszenie</a>
+{% endif %}
 
 {% endblock %}
