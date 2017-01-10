@@ -1,64 +1,67 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8"/>
+    <head>
+        <meta charset="UTF-8"/>
     {% block title %}{% endblock %}</title>
-    {% block stylesheets %}{% endblock %}
-    <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}">
+{% block stylesheets %}{% endblock %}
+<link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}">
 </head>
 <body>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-2">
-            <br>
-            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-            <a href="{{ path('fos_user_profile_show') }} " role="button" class="btn btn-primary btn-block">{{ app.user.username }}</a>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2">
+                <br>
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    <a href="{{ path('fos_user_profile_show') }}" role="button" class="btn btn-primary btn-block">{{ app.user.username }}</a>
+                    <a href="{{ path('fos_user_security_logout') }}" role="button" class="btn btn-danger btn-block">
+                        {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                    </a>
 
                 {% else %}
                     <a href="{{ path('fos_user_security_login') }} " role="button" class="btn btn-primary btn-block">Zaloguj się / Zarejestruj</a>
-            {% endif %}
-            <br>
-
-            <br>
-            <a href="{{ path('advertisement_index') }}" class="list-group-item list-group-item-info text-center">Wszystkie ogłoszenia</a>
-            <br>
-            {% render(controller("BoardBundle:Menu:menu")) %}
-
-        </div>
-
-
-        <div class="col-md-9">
-            <div>
-                {% block body %}
-                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                    {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
-                    <a href="{{ path('fos_user_security_logout') }}">
-                        {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
-                    </a>
-                
                 {% endif %}
+                <br>
+
+                <br>
+                <a href="{{ path('advertisement_index') }}" class="list-group-item list-group-item-info text-center">Wszystkie ogłoszenia</a>
+                <br>
+                {% render(controller("BoardBundle:Menu:menu")) %}
+
             </div>
 
-            {% if app.request.hasPreviousSession %}
-                {% for type, messages in app.session.flashbag.all() %}
-                    {% for message in messages %}
-                        <div class="flash-{{ type }}">
-                            {{ message }}
-                        </div>
-                    {% endfor %}
-                {% endfor %}
-            {% endif %}
-            <div>
-                {% block fos_user_content %}
-                {% endblock fos_user_content %}
+
+            <div class="col-md-9">
+                <div>
+                    {% block body %}
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                            {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+                            <a href="{{ path('fos_user_security_logout') }}">
+                                {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                            </a>
+
+                        {% endif %}
+                    </div>
+
+                    {% if app.request.hasPreviousSession %}
+                        {% for type, messages in app.session.flashbag.all() %}
+                            {% for message in messages %}
+                                <div class="flash-{{ type }}">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                    {% endif %}
+                    <div>
+                        {% block fos_user_content %}
+                        {% endblock fos_user_content %}
+                    </div>
+                {% endblock %}
             </div>
-            {% endblock %}
+
+            <div class="col-md-1"></div>
+
         </div>
-
-        <div class="col-md-1"></div>
-
     </div>
-</div>
 
 </body>
 </html>
