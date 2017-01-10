@@ -20,7 +20,10 @@ security:
             form_login:
               provider: fos_userbundle
               csrf_provider: form.csrf_provider
-            logout: true
+              default_target_path: /advertisement
+            logout:
+                path: fos_user_security_logout
+                target: /advertisement
             anonymous: true
 
             # activate different ways to authenticate
@@ -37,5 +40,5 @@ security:
         - { path: ^/advertisement/$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
         - { path: ^(\/advertisement\/).*, role: ROLE_USER }
-        - { path: ^/category/$, role: ROLE_USER }
+        - { path: ^/category/, role: ROLE_USER }
         - { path: ^/photo/, role: ROLE_USER }
