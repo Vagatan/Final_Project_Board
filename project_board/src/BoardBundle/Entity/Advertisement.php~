@@ -38,7 +38,7 @@ class Advertisement
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="expiration_date", type="datetime")
+     * @ORM\Column(name="expiration_date", type="date")
      */
     private $expirationDate;
 
@@ -124,7 +124,7 @@ class Advertisement
     /**
      * Set expirationDate
      *
-     * @param \DateTime $expirationDate
+     * @param \Date $expirationDate
      * @return Advertisement
      */
     public function setExpirationDate($expirationDate)
@@ -137,7 +137,7 @@ class Advertisement
     /**
      * Get expirationDate
      *
-     * @return \DateTime 
+     * @return \Date 
      */
     public function getExpirationDate()
     {

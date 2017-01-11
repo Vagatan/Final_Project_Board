@@ -41,6 +41,8 @@ class AdvertisementController extends Controller
     public function newAction(Request $request)
     {
         $advertisement = new Advertisement();
+        $advertisement->setUser($this->getUser());
+        $advertisement->setExpirationDate(new \DateTime());
         $form = $this->createForm('BoardBundle\Form\AdvertisementType', $advertisement);
         $form->handleRequest($request);
 
@@ -83,6 +85,7 @@ class AdvertisementController extends Controller
     public function editAction(Request $request, Advertisement $advertisement)
     {
         $deleteForm = $this->createDeleteForm($advertisement);
+        $advertisement->setUser($this->getUser());
         $editForm = $this->createForm('BoardBundle\Form\AdvertisementType', $advertisement);
         $editForm->handleRequest($request);
 

@@ -1,0 +1,9 @@
+<ol>
+{% for comment in comments %}
+    <li>
+    {{ comment.comment }}
+    {{ comment.user.username }}
+    {{ comment.advertisement.title }}
+    </li>
+{% endfor %}
+</ol>

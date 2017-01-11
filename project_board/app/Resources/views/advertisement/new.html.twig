@@ -2,18 +2,20 @@
 
 {% block body %}
     <h1>Dodaj nowe ogłoszenie</h1>
+    <div class="form-horizontal">
     <div class="form-group">
-        <div class="col-xs-4">
+        
 
             {{ form_start(form) }}
             <div class="col-xs-4">
                 {{ form_widget(form) }}
-
+                <br>
                 <input type="submit" value="Dodaj" class="btn btn-primary" role="button">
             </div>
             {{ form_end(form) }}
-        </div>
+       
         
+    </div>
     </div>
     <div>
         <a href="{{ path('advertisement_index') }}" class="btn btn-primary" role="button">Wróć do listy ogłoszeń</a>

@@ -1,7 +1,7 @@
 {% extends 'FOSUserBundle::layout.html.twig' %}
 
 {% block body %}
-    <h1>Ogłoszenie</h1>
+    <h1>Ogłoszenie #{{ advertisement.id }}</h1>
 
     <table class="table table-striped">
         <tbody>
@@ -20,21 +20,35 @@
             </tr>
             <tr>
                 <th>Ważne do</th>
-                <td>{% if advertisement.expirationDate %}{{ advertisement.expirationDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if advertisement.expirationDate %}{{ advertisement.expirationDate|date('Y-m-d') }}{% endif %}</td>
             </tr>
         </tbody>
     </table>
-    <h2>Numer kontaktowy: {{ advertisement.user.phonenumber }}</h2>
+    <h3>Zamieścił: {{ advertisement.user.username }}</h3>
+    <h3>Numer kontaktowy: {{ advertisement.user.phonenumber }}</h3>
+    {#{% render(controller("BoardBundle:Comment:addNewComment")) %}#}
+    <div>
+        <h3>Komentarze:</h3>
 
-    <div class="btn-group">
-    
-            <a href="{{ path('advertisement_index') }}" class="btn btn-primary" role="button">Wróć do listy ogłoszeń</a>
-       
-            <a href="{{ path('advertisement_edit', { 'id': advertisement.id }) }}" class="btn btn-info" role="button">Edytuj</a>
-        
-            {{ form_start(delete_form) }}
-            <input type="submit" value="Usuń" class="btn btn-danger" role="button">
-            {{ form_end(delete_form) }}
-        
+        <ol class="list-group">
+            {% for comment in advertisement.comments %}
+                <li class="list-group-item">{{ comment.comment }} ~ {{ comment.user.username }}</li>
+                {% endfor %}
+        </ol>
     </div>
-{% endblock %}
+    {{ dump() }}
+    <div class="btn-group">
+
+        <a href="{{ path('advertisement_index') }}" class="btn btn-primary" role="button">Wróć do listy ogłoszeń</a>
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            {% if (app.user.username  == advertisement.user.username or is_granted('ROLE_ADMIN')) %}
+                <a href="{{ path('advertisement_edit', { 'id': advertisement.id }) }}" class="btn btn-info" role="button">Edytuj</a>
+
+                {{ form_start(delete_form) }}
+                <input type="submit" value="Usuń" class="btn btn-danger" role="button">
+                {{ form_end(delete_form) }}
+            {% endif %}
+            {% endif %}
+
+        </div>
+        {% endblock %}
