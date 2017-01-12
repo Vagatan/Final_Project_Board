@@ -26,17 +26,26 @@
     </table>
     <h3>Zamieścił: {{ advertisement.user.username }}</h3>
     <h3>Numer kontaktowy: {{ advertisement.user.phonenumber }}</h3>
-    {#{% render(controller("BoardBundle:Comment:addNewComment")) %}#}
-    <div>
+
+
+    <div class="form-horizontal">
         <h3>Komentarze:</h3>
+
+        {% render(controller("BoardBundle:Comment:newComment")) %}
+
 
         <ol class="list-group">
             {% for comment in advertisement.comments %}
-                <li class="list-group-item">{{ comment.comment }} ~ {{ comment.user.username }}</li>
+                {% if comment.user is not null %}                    
+                    <li class="list-group-item">{{ comment.comment }} ~ {{ comment.user.username }}</li>
+                    {% else %}
+                    <li class="list-group-item">{{ comment.comment }} ~ Anonimowy</li>
+                    {% endif %}
                 {% endfor %}
         </ol>
     </div>
-    {{ dump() }}
+
+
     <div class="btn-group">
 
         <a href="{{ path('advertisement_index') }}" class="btn btn-primary" role="button">Wróć do listy ogłoszeń</a>
@@ -48,7 +57,7 @@
                 <input type="submit" value="Usuń" class="btn btn-danger" role="button">
                 {{ form_end(delete_form) }}
             {% endif %}
-            {% endif %}
-
-        </div>
-        {% endblock %}
+        {% endif %}
+{{ dump () }}
+    </div>
+{% endblock %}

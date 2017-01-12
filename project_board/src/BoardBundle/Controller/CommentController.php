@@ -14,15 +14,22 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 class CommentController extends Controller {
 
     public function createNewComment() {
+        
         $comment = new Comment ();
+        if ($this->getUser() !== null) {
+            $comment->setUser($this->getUser());
+            $comment->setAdvertisement();
+        } else {
+            $comment->setUser();
+            $comment->setAdvertisement();
+        }
 
         $form = $this->createFormBuilder($comment)
                 ->setAction($this->generateUrl("comment_add"))
                 ->setMethod("POST")
-                ->add("comment", "text")
-                ->add("user", EntityType::class, ["label"=>"User", "class" => "BoardBundle:User", "choice_label" => "username"])
-                ->add("advertisement", EntityType::class, ["label"=>"Advertisement", "class" => "BoardBundle:Advertisement", "choice_label" => "id"])
-                ->add("Dodaj", "submit")
+                ->add("comment", "textarea", ['label' => 'Wpisz komentarz', 'attr' => ['class' => 'form-control']])
+                ->add("advertisement", EntityType::class, ["label" => "Advertisement", "class" => "BoardBundle:Advertisement", "choice_label" => "id", 'attr' => ['class' => 'form-control']])
+                ->add("Dodaj", "submit", ['attr' => ['class' => 'btn btn-primary']])
                 ->getForm();
         return $form;
     }
@@ -33,12 +40,12 @@ class CommentController extends Controller {
      * 
      */
     public function newCommentAction() {
-        
+
         $form = $this->createNewComment();
-        
+
         return $this->render("BoardBundle:Comment:newComment.html.twig", ["form" => $form->createView()]);
     }
-    
+
     /**
      * @Route("/createcomm/", name="comment_add")
      * @Method("POST")
@@ -52,13 +59,12 @@ class CommentController extends Controller {
             $em = $this->getDoctrine()->getManager();
             $em->persist($comment);
             $em->flush();
-            return new Response("<html><body>OK</body></html>");
+            return $this->redirect($req->headers->get('referer'));
         } else {
             return $this->render("BoardBundle:Comment:newComment.html.twig", ["form" => $form->createView()]);
         }
     }
 
-    
     /**
      * @Route("/allcoms")
      * @Template
