@@ -8,7 +8,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class CommentController extends Controller {
@@ -51,6 +50,7 @@ class CommentController extends Controller {
      * @Method("POST")
      */
     public function addNewCommentAction(Request $req) {
+        
         $form = $this->createNewComment();
         $form->handleRequest($req);
 
