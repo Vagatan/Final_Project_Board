@@ -6,6 +6,7 @@ security:
     role_hierarchy:
       ROLE_ADMIN: ROLE_USER
       ROLE_SUPER_ADMIN: ROLE_ADMIN
+    access_denied_url: /advertisement
 
     # http://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
@@ -39,5 +40,5 @@ security:
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/advertisement/\d\/$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin, role: ROLE_ADMIN }        
-        - { path: ^/category/\d\/.*$, role: ROLE_ADMIN }
+        - { path: ^\/category\/((\d\/.*)|new)$, role: ROLE_ADMIN }
         - { path: ^/photo/, role: ROLE_USER }

@@ -36,13 +36,16 @@
 
     <div class="btn-group">
         <a href="{{ path('category_index') }}" class="btn btn-primary" role="button">Lista kategorii</a>
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            {% if (app.user.username  == advertisement.user.username or is_granted('ROLE_ADMIN')) %}
+                <a href="{{ path('advertisement_index') }}" class="btn btn-primary" role="button">Lista ogłoszeń</a>
 
-        <a href="{{ path('advertisement_index') }}" class="btn btn-primary" role="button">Lista ogłoszeń</a>
+                <a href="{{ path('category_edit', { 'id': category.id }) }}" class="btn btn-info" role="button">Edytuj kategorię</a>
 
-        <a href="{{ path('category_edit', { 'id': category.id }) }}" class="btn btn-info" role="button">Edytuj kategorię</a>
-
-        {{ form_start(delete_form) }}
-        <input type="submit" value="Usuń" class="btn btn-danger" role="button">
-        {{ form_end(delete_form) }}
+                {{ form_start(delete_form) }}
+                <input type="submit" value="Usuń" class="btn btn-danger" role="button">
+                {{ form_end(delete_form) }}
+            {% endif %}
+        {% endif %}
     </div>    
 {% endblock %}
