@@ -29,11 +29,11 @@
 
 
     <div class="form-horizontal">
+
+
+        {% render(controller("BoardBundle:Comment:newComment", {'advertId': advertisement.id})) %}
+
         <h3>Komentarze:</h3>
-
-        {% render(controller("BoardBundle:Comment:newComment")) %}
-
-
         <ol class="list-group">
             {% for comment in advertisement.comments %}
                 {% if comment.user is not null %}                    
@@ -58,6 +58,5 @@
                 {{ form_end(delete_form) }}
             {% endif %}
         {% endif %}
-{{ dump () }}
     </div>
 {% endblock %}
