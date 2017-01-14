@@ -1,0 +1,76 @@
+{% extends 'FOSUserBundle::layout.html.twig' %}
+
+{% block body %}
+    <div>
+        <h3>Ogłoszenia</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Tytuł</th>
+                    <th>Autor</th>
+                    <th>Ważność</th>
+                    <th>Akcje</th>
+                </tr>
+            </thead>
+            {% for advertisement in advertisements %}
+                <tr>
+                    <td>{{ advertisement.id }}</td>
+
+                    <td>{{ advertisement.title }}</td>                        
+
+                    <td>{{ advertisement.user.username }}</td>
+
+                    <td>{{ advertisement.expirationDate|date('Y-m-d') }}</td>
+
+                    <td><a href="{{ path('advertisement_edit', { 'id': advertisement.id }) }}" class="btn btn-info" role="button">Edytuj</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div>
+        <h3>Kategorie</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Kategoria</th>
+                    <th>Akcje</th>
+                </tr>
+            </thead>
+            {% for category in categories %}
+                <tr>
+                    <td>{{ category.name }}</td>
+
+                    <td><a href="{{ path('category_edit', { 'id': category.id }) }}" class="btn btn-info" role="button">Edytuj</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+
+    <div>
+        <h3>Komentarze</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Ogłoszenie</th>
+                    <th>Komentarz</th>
+                    <th>Autor</th>
+                </tr>
+            </thead>
+            {% for comment in comments %}
+                <tr> 
+                    <td>{{ comment.advertisement.title }}</td>
+                    <td>{{ comment.comment }}</td>
+                    {% if comment.user is not null %}
+                        <td>{{ comment.user.username }}</td>
+                    {% else %}
+                        <td>Anonimowy</td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

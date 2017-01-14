@@ -13,12 +13,15 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 class CommentController extends Controller {
 
     public function createNewComment() {
-        
+
         $comment = new Comment ();
+
         if ($this->getUser() !== null) {
+            //setting logged user
             $comment->setUser($this->getUser());
             $comment->setAdvertisement();
         } else {
+            //setting anonymous user
             $comment->setUser();
             $comment->setAdvertisement();
         }
@@ -30,13 +33,12 @@ class CommentController extends Controller {
                 ->add("advertisement", EntityType::class, ["label" => "Advertisement", "class" => "BoardBundle:Advertisement", "choice_label" => "id", 'attr' => ['class' => 'form-control']])
                 ->add("Dodaj", "submit", ['attr' => ['class' => 'btn btn-primary']])
                 ->getForm();
+
         return $form;
     }
 
     /**
-     * @Route("/commtest/")
-     * 
-     * 
+     * @Route("/commtest/") 
      */
     public function newCommentAction() {
 
@@ -50,7 +52,7 @@ class CommentController extends Controller {
      * @Method("POST")
      */
     public function addNewCommentAction(Request $req) {
-        
+
         $form = $this->createNewComment();
         $form->handleRequest($req);
 
@@ -59,6 +61,7 @@ class CommentController extends Controller {
             $em = $this->getDoctrine()->getManager();
             $em->persist($comment);
             $em->flush();
+            //redirection to current page
             return $this->redirect($req->headers->get('referer'));
         } else {
             return $this->render("BoardBundle:Comment:newComment.html.twig", ["form" => $form->createView()]);
