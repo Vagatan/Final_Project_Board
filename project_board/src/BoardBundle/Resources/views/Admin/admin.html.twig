@@ -1,6 +1,7 @@
 {% extends 'FOSUserBundle::layout.html.twig' %}
 
 {% block body %}
+    <h1>Panel administracyjny {{ app.user.username }}</h3>
     <div>
         <h3>Ogłoszenia</h3>
         <table class="table table-striped">
@@ -23,7 +24,7 @@
 
                     <td>{{ advertisement.expirationDate|date('Y-m-d') }}</td>
 
-                    <td><a href="{{ path('advertisement_edit', { 'id': advertisement.id }) }}" class="btn btn-info" role="button">Edytuj</a>
+                    <td><a href="{{ path('advertisement_edit', { 'id': advertisement.id }) }}" class="btn btn-info" role="button">Edytuj</a><a href="{{ path('advertisement_delete', { 'id': advertisement.id }) }}" class="btn btn-danger" role="button">Usuń</a>
                     </td>
                 </tr>
             {% endfor %}
