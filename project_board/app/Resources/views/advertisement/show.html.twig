@@ -33,7 +33,11 @@
 
         {% render(controller("BoardBundle:Comment:newComment", {'advertId': advertisement.id})) %}
 
-        <h3>Komentarze:</h3>
+        <h3>Komentarze 
+            {% if advertisement.comments|length > 0 %}
+                <span class="badge">{{advertisement.comments|length }}</span>
+            {% endif %}
+            :</h3>
         <ol class="list-group">
             {% for comment in advertisement.comments %}
                 {% if comment.user is not null %}                    
