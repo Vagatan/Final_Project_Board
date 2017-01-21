@@ -1,4 +1,0 @@
-BoardBundle\Entity\Photo:
-    image:
-        mapping:           product_image
-        filename_property: image_name

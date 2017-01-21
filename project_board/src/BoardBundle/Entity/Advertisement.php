@@ -4,6 +4,7 @@ namespace BoardBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
  * Advertisement
  *

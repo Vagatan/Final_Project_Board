@@ -88,4 +88,7 @@ vich_uploader:
         product_image:
             uri_prefix:         /images/advertisements
             upload_destination: '%kernel.root_dir%/../web/images/advertisements'
-   
+            inject_on_load:     false
+            delete_on_update:   true
+            delete_on_remove:   true
+            namer:              vich_uploader.namer_uniqid

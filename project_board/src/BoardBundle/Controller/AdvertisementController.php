@@ -68,11 +68,11 @@ class AdvertisementController extends Controller {
     public function showAction(Advertisement $advertisement) {
         $deleteForm = $this->createDeleteForm($advertisement);
         
-        $currentPhoto = $advertisement->getPhotos();
+        
         return $this->render('advertisement/show.html.twig', array(
                     'advertisement' => $advertisement,
                     'delete_form' => $deleteForm->createView(),
-                    'photo' => $currentPhoto
+                    
         ));
     }
 
