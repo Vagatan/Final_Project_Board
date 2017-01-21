@@ -38,6 +38,15 @@ class CommentController extends Controller {
             $em = $this->getDoctrine()->getManager();
             $em->persist($comment);
             $em->flush();
+            
+            $message = \Swift_Message::newInstance()
+                    ->setSubject("Nowy komentarz")
+                    ->setFrom("admin@admin.com")
+                    ->setTo($this->getDoctrine()->getRepository('BoardBundle:Advertisement')->find($advertId)->getUser()->getEmail())
+                    ->setBody("Dodano nowy komentarz pod Twoim ogłoszeniem")
+            ;
+            $this->get('mailer')->send($message);
+            
             return $this->redirect($req->headers->get('referer'));
         }
 

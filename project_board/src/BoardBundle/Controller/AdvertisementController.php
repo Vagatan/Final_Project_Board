@@ -3,6 +3,7 @@
 namespace BoardBundle\Controller;
 
 use BoardBundle\Entity\Advertisement;
+use BoardBundle\Entity\Photo;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -13,22 +14,21 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @Route("advertisement")
  */
-class AdvertisementController extends Controller
-{
+class AdvertisementController extends Controller {
+
     /**
      * Lists all advertisement entities.
      *
      * @Route("/", name="advertisement_index")
      * @Method("GET")
      */
-    public function indexAction()
-    {
+    public function indexAction() {
         $em = $this->getDoctrine()->getManager();
 
         $advertisements = $em->getRepository('BoardBundle:Advertisement')->findAll();
 
         return $this->render('advertisement/index.html.twig', array(
-            'advertisements' => $advertisements,
+                    'advertisements' => $advertisements,
         ));
     }
 
@@ -38,8 +38,7 @@ class AdvertisementController extends Controller
      * @Route("/new", name="advertisement_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request)
-    {
+    public function newAction(Request $request) {
         $advertisement = new Advertisement();
         $advertisement->setUser($this->getUser());
         $advertisement->setExpirationDate(new \DateTime());
@@ -55,8 +54,8 @@ class AdvertisementController extends Controller
         }
 
         return $this->render('advertisement/new.html.twig', array(
-            'advertisement' => $advertisement,
-            'form' => $form->createView(),
+                    'advertisement' => $advertisement,
+                    'form' => $form->createView(),
         ));
     }
 
@@ -66,13 +65,14 @@ class AdvertisementController extends Controller
      * @Route("/{id}", name="advertisement_show")
      * @Method("GET")
      */
-    public function showAction(Advertisement $advertisement)
-    {
+    public function showAction(Advertisement $advertisement) {
         $deleteForm = $this->createDeleteForm($advertisement);
-
+        
+        $currentPhoto = $advertisement->getPhotos();
         return $this->render('advertisement/show.html.twig', array(
-            'advertisement' => $advertisement,
-            'delete_form' => $deleteForm->createView(),
+                    'advertisement' => $advertisement,
+                    'delete_form' => $deleteForm->createView(),
+                    'photo' => $currentPhoto
         ));
     }
 
@@ -82,8 +82,7 @@ class AdvertisementController extends Controller
      * @Route("/{id}/edit", name="advertisement_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, Advertisement $advertisement)
-    {
+    public function editAction(Request $request, Advertisement $advertisement) {
         $deleteForm = $this->createDeleteForm($advertisement);
         $advertisement->setUser($this->getUser());
         $editForm = $this->createForm('BoardBundle\Form\AdvertisementType', $advertisement);
@@ -96,9 +95,9 @@ class AdvertisementController extends Controller
         }
 
         return $this->render('advertisement/edit.html.twig', array(
-            'advertisement' => $advertisement,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+                    'advertisement' => $advertisement,
+                    'edit_form' => $editForm->createView(),
+                    'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -108,8 +107,7 @@ class AdvertisementController extends Controller
      * @Route("/{id}", name="advertisement_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, Advertisement $advertisement)
-    {
+    public function deleteAction(Request $request, Advertisement $advertisement) {
         $form = $this->createDeleteForm($advertisement);
         $form->handleRequest($request);
 
@@ -129,11 +127,11 @@ class AdvertisementController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm(Advertisement $advertisement)
-    {
+    private function createDeleteForm(Advertisement $advertisement) {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('advertisement_delete', array('id' => $advertisement->getId())))
-            ->setMethod('DELETE')
-            ->getForm();
+                        ->setAction($this->generateUrl('advertisement_delete', array('id' => $advertisement->getId())))
+                        ->setMethod('DELETE')
+                        ->getForm();
     }
+
 }

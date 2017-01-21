@@ -27,6 +27,11 @@
     <h3>Zamieścił: {{ advertisement.user.username }}</h3>
     <h3>Numer kontaktowy: {{ advertisement.user.phonenumber }}</h3>
 
+    <div>
+        {{ dump() }}
+         <img src="{{ vich_uploader_asset(photo, 'imageFile') }}" alt="{{ photo.imagename }}" /> 
+        
+    </div>
 
     <div class="form-horizontal">
 
