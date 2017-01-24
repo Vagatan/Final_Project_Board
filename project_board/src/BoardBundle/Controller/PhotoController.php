@@ -18,7 +18,7 @@ class PhotoController extends Controller {
 
         $form = $this->createFormBuilder($photo)
                 ->setAction("/add_photo/{$advertId}")
-                ->add("imageFile", "file", ["label" => "Wybierz plik obrazka"])
+                ->add("imageFile", "file", ["label" => "Wybierz plik obrazka", 'attr' => ['class' => 'btn btn-default btn-file']])
                 ->add("Dodaj", "submit", ['attr' => ['class' => 'btn btn-primary']])
                 ->getForm();
 

@@ -28,12 +28,9 @@
     <h3>Numer kontaktowy: {{ advertisement.user.phonenumber }}</h3>
 
     <div>
-        
+
         {% for photo in advertisement.photos %}
-
-            <img src="{{ vich_uploader_asset(photo, 'imageFile') }}" alt="{{ photo.imagename }}" class="img-responsive" />
-
-         {{ dump() }}
+            <img src="{{ vich_uploader_asset(photo, 'imageFile') }}" alt="{{ photo.imagename }}" class="img-responsive center-block" />
         {% endfor %}
     </div>
 
