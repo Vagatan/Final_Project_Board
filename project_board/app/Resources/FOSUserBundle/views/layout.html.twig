@@ -10,8 +10,8 @@
     <body>
         <div class="container-fluid">
             <div class="row">
+
                 <div class="col-md-2">
-                    
                     <br>
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                         <a href="{{ path('fos_user_profile_show') }}" role="button" class="btn btn-primary btn-block">{{ app.user.username }}</a>
@@ -31,23 +31,11 @@
                     <a href="{{ path('advertisement_index') }}" role="button" class="btn btn-primary btn-block">Wszystkie ogłoszenia</a>
                     <br>
                     {% render(controller("BoardBundle:Menu:menu")) %}
-                    
                 </div>
 
 
                 <div class="col-md-9">
-                    <div>
-                        {% block body %}
-                            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                                {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
-                                <a href="{{ path('fos_user_security_logout') }}">
-                                    {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
-                                </a>
-
-                            {% endif %}
-
-                        </div>
-
+                    {% block body %}
                         {% if app.request.hasPreviousSession %}
                             {% for type, messages in app.session.flashbag.all() %}
                                 {% for message in messages %}
@@ -64,9 +52,15 @@
                     {% endblock %}
                 </div>
 
-                <div class="col-md-1"></div>
 
-            </div>
+                <div class="col-md-1">
+                    {#
+                    <img src="http://www.beerpubs.pl/grafiki/powiekszenia/fortuna-sliwkowe.png" class="img-responsive center-block" />
+                    #}
+                </div>
+
+
+            </div>                
         </div>
 
     </body>
